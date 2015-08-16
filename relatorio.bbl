@@ -19,6 +19,27 @@
 
 \refsection{0}
   \sortlist{nty}{nty}
+    \entry{Rossum:1995:PRM:869369}{report}{}
+      \name{author}{1}{}{%
+        {{hash=8c3894fdb347a83e88650e1a56644595}{Rossum}{R\bibinitperiod}{Guido}{G\bibinitperiod}{}{}{}{}}%
+      }
+      \list{location}{1}{%
+        {Amsterdam, The Netherlands, The Netherlands}%
+      }
+      \list{publisher}{2}{%
+        {CWI (Centre for Mathematics}%
+        {Computer Science)}%
+      }
+      \strng{namehash}{8c3894fdb347a83e88650e1a56644595}
+      \strng{fullhash}{8c3894fdb347a83e88650e1a56644595}
+      \field{sortinit}{R}
+      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Python Reference Manual}
+      \field{type}{techreport}
+      \field{year}{1995}
+    \endentry
     \entry{venners:2003}{online}{}
       \name{author}{1}{}{%
         {{hash=4f73d3c9fa69ceb9612bb63bdb7f5db5}{Venners}{V\bibinitperiod}{Bill}{B\bibinitperiod}{}{}{}{}}%
