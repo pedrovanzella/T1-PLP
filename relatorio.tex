@@ -106,12 +106,62 @@ uso de uma variável auxiliar.
 
 Aqui vemos duas variáveis sendo atribuídas uma a outra, em apenas um passo.
 
+Por exemplo, tendo duas variáveis, \textsf{a} e \textsf{b}, podemos atribuí-las
+uma à outra da seguinte maneira:
+
+\begin{lstlisting}
+a, b = b, a
+\end{lstlisting}
+
 \subsection{Legibilidade}\label{sec:legibilidade}
+
+A linguagem preza pela legibilidade, empregando identação como marca de blocos.
+Veja, por exemplo, a sintaxe para um bloco \textsf{if-else} com um \textsf{for}
+dentro do \textsf{if}:
+
+\begin{lstlisting}
+if <condicao>:
+    <comando>
+    for <variavel> in <lista>:
+        <comando>
+        <comando>
+    <comando-fora-do-for>
+else:
+    <comando>
+\end{lstlisting}
+
+É trivial vermos o que está dentro ou fora do \textsf{for}, apenas olhando para
+a identação.
 
 \subsection{Redigibilidade}\label{sec:redigibilidade}
 
+Operações complexas, como filtragem de listas, pode ser feito com \textit{List
+  Comprehensions}. A sintaxe é a seguinte:
+
+\begin{lstlisting}
+[<chamada_funcao>(<variavel>) for <variavel> in <lista>]
+\end{lstlisting}
+
+Por exemplo, para termos uma lista com o seno de todas os elemetos de outra
+lista:
+
+\begin{lstlisting}
+[sin(x) for x in list]
+\end{lstlisting}
+
 \subsection{Capacidade do Tratamento de Excessões}\label{sec:excessoes}
 
+A linguagem Python possui um bom suporte a excessões, com \textsf{try-except}:
+
+\begin{lstlisting}
+try:
+    <comandos>
+except [<exception>]:
+    <comandos>
+\end{lstlisting}
+
+É possível pegar qualquer excessão omitindo \textsf{exception}, ou pegar apenas
+excessões específicas.
 
 \section{Considerações Finais}
 
