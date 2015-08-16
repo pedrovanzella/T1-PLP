@@ -1,482 +1,443 @@
-%% abtex2-modelo-artigo.tex, v-1.7.1 laurocesar
-%% Copyright 2012-2013 by abnTeX2 group at http://abntex2.googlecode.com/ 
-%%
-%% This work may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3
-%% of this license or (at your option) any later version.
-%% The latest version of this license is in
-%%   http://www.latex-project.org/lppl.txt
-%% and version 1.3 or later is part of all distributions of LaTeX
-%% version 2005/12/01 or later.
-%%
-%% This work has the LPPL maintenance status `maintained'.
-%% 
-%% The Current Maintainer of this work is the abnTeX2 team, led
-%% by Lauro César Araujo. Further information are available on 
-%% http://abntex2.googlecode.com/
-%%
-%% This work consists of the files abntex2-modelo-artigo.tex and
-%% abntex2-modelo-references.bib
-%%
+\documentclass[12pt]{article}
 
-% ------------------------------------------------------------------------
-% ------------------------------------------------------------------------
-% abnTeX2: Modelo de Artigo Acadêmico em conformidade com
-% ABNT NBR 6022:2003: Informação e documentação - Artigo em publicação 
-% periódica científica impressa - Apresentação
-% ------------------------------------------------------------------------
-% ------------------------------------------------------------------------
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
 
-\documentclass[
-	% -- opções da classe memoir --
-	article,			% indica que é um artigo acadêmico
-	11pt,				% tamanho da fonte
-	oneside,			% para impressão apenas no verso. Oposto a twoside
-	a4paper,			% tamanho do papel. 
-	% -- opções da classe abntex2 --
-	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
-	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
-	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
-	%subsubsection=TITLE % títulos de subsubseções convertidos em letras maiúsculas
-	% -- opções do pacote babel --
-	english,			% idioma adicional para hifenização
-	brazil,				% o último idioma é o principal do documento
-	]{abntex2}
+\usepackage{graphicx,url}
 
+\usepackage[brazil]{babel}   
+\usepackage[utf8]{inputenc}  
+\usepackage{amsmath}
+% UTF-8 encoding is recommended by ShareLaTex
 
-% ---
-% PACOTES
-% ---
+\usepackage[backend=biber]{biblatex}
+\addbibresource{relatorio.bib}
 
-% ---
-% Pacotes fundamentais 
-% ---
-\usepackage{cmap}				% Mapear caracteres especiais no PDF
-\usepackage{lmodern}			% Usa a fonte Latin Modern
-\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
-\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
-\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
-\usepackage{nomencl} 			% Lista de simbolos
-\usepackage{color}				% Controle das cores
-\usepackage{graphicx}			% Inclusão de gráficos
-% ---
-		
-% ---
-% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
-% ---
-\usepackage{lipsum}				% para geração de dummy text
-% ---
-		
-% ---
-% Pacotes de citações
-% ---
-\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
-\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
-% ---
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+% activate={true,nocompatibility} - activate protrusion and expansion
+% final - enable microtype; use "draft" to disable
+% tracking=true, kerning=true, spacing=true - activate these techniques
+% factor=1100 - add 10% to the protrusion amount (default is 1000)
+% stretch=10, shrink=10 - reduce stretchability/shrinkability (default is 20/20)
 
-% ---
-% Configurações do pacote backref
-% Usado sem a opção hyperpageref de backref
-\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
-% Texto padrão antes do número das páginas
-\renewcommand{\backref}{}
-% Define os textos da citação
-\renewcommand*{\backrefalt}[4]{
-	\ifcase #1 %
-		Nenhuma citação no texto.%
-	\or
-		Citado na página #2.%
-	\else
-		Citado #1 vezes nas páginas #2.%
-	\fi}%
-% ---
+\usepackage{float}
+\usepackage{listings}
 
-% ---
-% Informações de dados para CAPA e FOLHA DE ROSTO
-% ---
-\titulo{Modelo Canônico de\\ Artigo científico com \abnTeX}
-\autor{Equipe \abnTeX\thanks{\url{http://abntex2.googlecode.com/}} \and Lauro
-César
-Araujo\thanks{laurocesar@laurocesar.com}}
-\local{Brasil}
-\data{2013, v-1.7.1}
-% ---
+\usepackage{caption}
 
-% ---
-% Configurações de aparência do PDF final
-
-% alterando o aspecto da cor azul
-\definecolor{blue}{RGB}{41,5,195}
-
-% informações do PDF
-\makeatletter
-\hypersetup{
-     	%pagebackref=true,
-		pdftitle={\@title}, 
-		pdfauthor={\@author},
-    	pdfsubject={Modelo de artigo científico com abnTeX2},
-	    pdfcreator={LaTeX with abnTeX2},
-		pdfkeywords={abnt}{latex}{abntex}{abntex2}{atigo científico}, 
-		colorlinks=true,       		% false: boxed links; true: colored links
-    	linkcolor=blue,          	% color of internal links
-    	citecolor=blue,        		% color of links to bibliography
-    	filecolor=magenta,      		% color of file links
-		urlcolor=blue,
-		bookmarksdepth=4
+\usepackage{color}
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
 }
-\makeatother
-% --- 
+ 
+\lstset{style=mystyle}
+     
+\sloppy
 
-% ---
-% compila o indice
-% ---
-\makeindex
-% ---
+\title{Análise da Linguagem Python}
 
-% ---
-% Altera as margens padrões
-% ---
-\setlrmarginsandblock{4cm}{4cm}{*}
-\setulmarginsandblock{4cm}{4cm}{*}
-\checkandfixthelayout
-% ---
+\author{Pedro Pillon Vanzella}
 
-% --- 
-% Espaçamentos entre linhas e parágrafos 
-% --- 
+\date{Agosto de 2015}
 
-% O tamanho do parágrafo é dado por:
-\setlength{\parindent}{1.3cm}
+\begin{document} 
 
-% Controle do espaçamento entre um parágrafo e outro:
-\setlength{\parskip}{0.2cm}  % tente também \onelineskip
-
-% Espaçamento simples
-\SingleSpacing
-
-% ----
-% Início do documento
-% ----
-\begin{document}
-
-% Retira espaço extra obsoleto entre as frases.
-\frenchspacing 
-
-% ----------------------------------------------------------
-% ELEMENTOS PRÉ-TEXTUAIS
-% ----------------------------------------------------------
-
-%---
-%
-% Se desejar escrever o artigo em duas colunas, descomente a linha abaixo
-% e a linha com o texto ``FIM DE ARTIGO EM DUAS COLUNAS''.
-% \twocolumn[    		% INICIO DE ARTIGO EM DUAS COLUNAS
-%
-%---
-% página de titulo
 \maketitle
-
-% resumo em português
-\begin{resumoumacoluna}
- Conforme a ABNT NBR 6022:2003, o resumo é elemento obrigatório, constituído de
- uma sequência de frases concisas e objetivas e não de uma simples enumeração
- de tópicos, não ultrapassando 250 palavras, seguido, logo abaixo, das palavras
- representativas do conteúdo do trabalho, isto é, palavras-chave e/ou
- descritores, conforme a NBR 6028. (\ldots) As palavras-chave devem figurar logo
- abaixo do resumo, antecedidas da expressão Palavras-chave:, separadas entre si por
- ponto e finalizadas também por ponto.
- 
- \vspace{\onelineskip}
- 
- \noindent
- \textbf{Palavras-chaves}: latex. abntex. editoração de texto.
-\end{resumoumacoluna}
-
-% ]  				% FIM DE ARTIGO EM DUAS COLUNAS
-% ---
-
-% ----------------------------------------------------------
-% ELEMENTOS TEXTUAIS
-% ----------------------------------------------------------
-\textual
-
-% ----------------------------------------------------------
-% Introdução
-% ----------------------------------------------------------
-\section*{Introdução}
-
-Este documento e seu código-fonte são exemplos de referência de uso da classe
-\textsf{abntex2} e do pacote \textsf{abntex2cite}. O documento exemplifica a
-elaboração de publicação periódica científica impressa produzida conforme a ABNT
-NBR 6022:2003 \emph{Informação e documentação - Artigo em publicação periódica
-científica impressa - Apresentação}.
-
-A expressão ``Modelo canônico'' é utilizada para indicar que \abnTeX\ não é
-modelo específico de nenhuma universidade ou instituição, mas que implementa tão
-somente os requisitos das normas da ABNT. Uma lista completa das normas
-observadas pelo \abnTeX\ é apresentada em \citeonline{abntex2classe}.
-
-Sinta-se convidado a participar do projeto \abnTeX! Acesse o site do projeto em
-\url{http://abntex2.googlecode.com/}. Também fique livre para conhecer,
-estudar, alterar e redistribuir o trabalho do \abnTeX, desde que os arquivos
-modificados tenham seus nomes alterados e que os créditos sejam dados aos
-autores originais, nos termos da ``The \LaTeX\ Project Public
-License''\footnote{\url{http://www.latex-project.org/lppl.txt}}.
-
-Encorajamos que sejam realizadas customizações específicas deste documento.
-Porém, recomendamos que ao invés de se alterar diretamente os arquivos do
-\abnTeX, distribua-se arquivos com as respectivas customizações. Isso permite
-que futuras versões do \abnTeX~não se tornem automaticamente incompatíveis com
-as customizações promovidas. Consulte \citeonline{abntex2-wiki-como-customizar}
-par mais informações.
-
-Este exemplo deve ser utilizado como complemento do manual da classe
-\textsf{abntex2} \cite{abntex2classe}, dos manuais do pacote
-\textsf{abntex2cite} \cite{abntex2cite,abntex2cite-alf} e do manual da classe
-\textsf{memoir} \cite{memoir}. Consulte o \citeonline{abntex2modelo} para obter
-exemplos e informações adicionais de uso de \abnTeX\ e de \LaTeX.
-
-% ----------------------------------------------------------
-% Seção de explicações
-% ----------------------------------------------------------
-\section{Exemplos de comandos}
-
-\subsection{Margens}
-
-A norma ABNT NBR 6022:2003 não estabelece uma margem específica a ser utilizada
-no artigo científico. Dessa maneira, caso deseje alterar as margens, utilize os
-comandos abaixo:
-
-\begin{verbatim}
-   \setlrmarginsandblock{4cm}{4cm}{*}
-   \setulmarginsandblock{4cm}{4cm}{*}
-   \checkandfixthelayout
-\end{verbatim}
-
-\subsection{Duas colunas}
-
-É comum que artigos científicos sejam escritos em duas colunas. Para isso,
-adicione a opção \texttt{twocolumn} à classe do documento, como no exemplo:
-
-\begin{verbatim}
-   \documentclass[article,11pt,oneside,a4paper,twocolumn]{abntex2}
-\end{verbatim}
-
-É possível indicar pontos do texto que se deseja manter em apenas uma coluna,
-geralmente o título e os resumos. Os resumos em única coluna em documentos com
-a opção \texttt{twocolumn} devem ser escritos no ambiente
-\texttt{resumoumacoluna}:
-
-\begin{verbatim}
-   \twocolumn[              % INICIO DE ARTIGO EM DUAS COLUNAS
-
-     \maketitle             % pagina de titulo
-
-     \renewcommand{\resumoname}{Nome do resumo}
-     \begin{resumoumacoluna}
-        Texto do resumo.
-      
-        \vspace{\onelineskip}
- 
-        \noindent
-        \textbf{Palavras-chaves}: latex. abntex. editoração de texto.
-     \end{resumoumacoluna}
-   
-   ]                        % FIM DE ARTIGO EM DUAS COLUNAS
-\end{verbatim}
-
-\subsection{Recuo do ambiente \texttt{citacao}}
-
-Na produção de artigos (opção \texttt{article}), pode ser útil alterar o recuo
-do ambiente \texttt{citacao}. Nesse caso, utilize o comando:
-
-\begin{verbatim}
-   \setlength{\ABNTEXcitacaorecuo}{1.8cm}
-\end{verbatim}
-
-Quando um documento é produzido com a opção \texttt{twocolumn}, a classe
-\textsf{abntex2} automaticamente altera o recuo padrão de 4 cm, definido pela
-ABNT NBR 10520:2002 seção 5.3, para 1.8 cm.
-
-\section{Cabeçalhos e rodapés customizados}
-
-Diferentes estilos de cabeçalhos e rodapés podem ser criados usando os
-recursos padrões do \textsf{memoir}.
-
-Um estilo próprio de cabeçalhos e rodapés pode ser diferente para páginas pares
-e ímpares. Observe que a diferenciação entre páginas pares e ímpares só é
-utilizada se a opção \texttt{twoside} da classe \textsf{abntex2} for utilizado.
-Caso contrário, apenas o cabeçalho padrão da página par (\emph{even}) é usado.
-
-Veja o exemplo abaixo cria um estilo chamado \texttt{meuestilo}. O código deve
-ser inserido no preâmbulo do documento.
-
-\begin{verbatim}
-%%criar um novo estilo de cabeçalhos e rodapés
-\makepagestyle{meuestilo}
-  %%cabeçalhos
-  \makeevenhead{meuestilo} %%pagina par
-     {topo par à esquerda}
-     {centro \thepage}
-     {direita}
-  \makeoddhead{meuestilo} %%pagina ímpar ou com oneside
-     {topo ímpar/oneside à esquerda}
-     {centro\thepage}
-     {direita}
-  \makeheadrule{meuestilo}{\textwidth}{\normalrulethickness} %linha
-  %% rodapé
-  \makeevenfoot{meuestilo}
-     {rodapé par à esquerda} %%pagina par
-     {centro \thepage}
-     {direita} 
-  \makeoddfoot{meuestilo} %%pagina ímpar ou com oneside
-     {rodapé ímpar/onside à esquerda}
-     {centro \thepage}
-     {direita}
-\end{verbatim}
-
-Para usar o estilo criado, use o comando abaixo imediatamente após um dos
-comandos de divisão do documento. Por exemplo:
-
-\begin{verbatim}
-   \begin{document}
-     %%usar o estilo criado na primeira página do artigo:
-     \pretextual
-     \pagestyle{meuestilo}
      
-     \maketitle
-     ...
-     
-     %%usar o estilo criado nas páginas textuais
-     \textual
-     \pagestyle{meuestilo}
-     
-     \chapter{Novo capítulo}
-     ...
-   \end{document}  
-\end{verbatim}
-   
-Outras informações sobre cabeçalhos e rodapés estão disponíveis na seção 7.3 do
-manual do \textsf{memoir} \cite{memoir}.
+\section{Introdução}\label{sec:introducao}
 
-\section{Mais exemplos no Modelo Canônico de Trabalhos Acadêmicos}
+Dentre as muitas aplicações dos métodos numéricos, uma das mais populares é o processamento de imagens~\cite{acharya:2005}. Estes métodos são empregados em um número de meios, como fotografia digital, tratamento de imagens, produção de vídeo e jogos.
 
-Este modelo de artigo é limitado em número de exemplos de comandos, pois são
-apresentados exclusivamente comandos diretamente relacionados com a produção de
-artigos.
+Os problemas de redimensionamento e rotação de imagens são alguns dos mais simples e ao mesmo tempo mais comuns. Analisemos o problema de um jogo: imagens são utilizadas como texturas em praticamente todos os polígonos e um jogo. É possível que elas devam ser redimensionadas ou rotacionadas a cada quadro, e potencialmente milhares delas serão exibidas ao mesmo tempo. É interessante, então, que se faça uso de algoritmos de custo computacional mais baixo possível, de modo a tornar a experiência do jogo mais fluida e agradável.
 
-Para exemplos adicionais de \abnTeX\ e \LaTeX, como inclusão de figuras,
-fórmulas matemáticas, citações, e outros, consulte o documento
-\citeonline{abntex2modelo}.
+Para este fim, utilizaremos o ambiente GNU Octave, que é um software livre para a computação numérica e científica~\cite{eaton:2008}.
 
-\section{Consulte o manual da classe \textsf{abntex2}}
+Para os métodos de redimensionamento analisaremos as interpolações \textit{Nearest Neighbor} (Seção~\ref{sec:redimensionamento:nearest}), Bicúbica (Seção~\ref{sec:redimensionamento:bicubica}) e Bilinear (Seção~\ref{sec:redimensionamento:bilinear}). Para os métodos de rotação, analisaremos os métodos de Rotação por \textit{Nearest Neighbor} (Seção~\ref{sec:rotacao:nearest}), por Interpolação Bilinear (Seção~\ref{sec:rotacao:bilinear}) e por Interpolação Bicúbica (Seção~\ref{sec:rotacao:bicubica}).
 
-Consulte o manual da classe \textsf{abntex2} \cite{abntex2classe} para uma
-referência completa das macros e ambientes disponíveis.
+Utilizaremos sempre a mesma imagem como base, de modo a podermos comparar os resultados. Podemos vê-la na Figura~\ref{fig:vaca:semnada}.
 
-% ---
-% Finaliza a parte no bookmark do PDF, para que se inicie o bookmark na raiz
-% ---
-\bookmarksetup{startatroot}% 
-% ---
+Será feita uma comparação do tempo de execução de cada algoritmo, bem como da qualidade da imagem gerada, de modo a tomar uma decisão quanto à melhor técnica para o caso hipotético de texturas em um jogo 3D.
 
-% ---
-% Conclusão
-% ---
-\section*{Considerações finais}
-\addcontentsline{toc}{section}{Considerações finais}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{cow_small.png}
+\caption{Uma simpática vaquinha}
+\label{fig:vaca:semnada}
+\end{figure}
 
-\lipsum[1]
+\section{Redimensionamento de Imagens}\label{sec:redimensionamento}
 
-\begin{citacao}
-\lipsum[2]
-\end{citacao}
+Redimensionamento de imagens é um processo não trivial, que envolve um balanço entre eficiência e qualidade de resultado~\cite{kopf:2011}.
 
-\lipsum[3]
+Dentre os vários algoritmos existentes para esta tarefa, vamos abordar os três mais comuns~\cite{han2013}: Interpolação por \textit{Nearest Neighbor}, Interpolação Bilinear e Interpolação Bicúbica.
 
-% ----------------------------------------------------------
-% ELEMENTOS PÓS-TEXTUAIS
-% ----------------------------------------------------------
-\postextual
+É importante analisarmos exatamente este balanço de qualidade e performance. Uma solução que gere resultados perfeitos, mas demore muito não seria útil, pois deve ser executada milhares de vezes a cada quadro, e isto reduziria a performance do jogo. De mesmo modo, uma solução mais rápida não é útil caso gere resultados muito ruins, ou introduza artefatos que causem discontinuidades nas texturas, pois isso quebraria a ilusão de 3D no jogo.
 
-% ----------------------------------------------------------
-% Referências bibliográficas
-% ----------------------------------------------------------
-\bibliography{referencias}
+Desta forma, a escolha de melhor método é, possivelmente, uma combinação de avaliações objetivas e subjetivas. Descarta-se as soluções que geram resultados pouco visualmente agradáveis\footnote{uma avaliação completamente subjetiva}, e elege-se como melhor o que, dentre os que sobraram, traz resultados mais rápidos\footnote{uma avaliação objetiva}.
 
-% ----------------------------------------------------------
-% Glossário
-% ----------------------------------------------------------
-%
-% Há diversas soluções prontas para glossário em LaTeX. 
-% Consulte o manual do abnTeX2 para obter sugestões.
-%
-%\glossary
+\subsection{Interpolação por \textit{Nearest Neighbor}}\label{sec:redimensionamento:nearest}
+Interpolação por \textit{Nearest Neighbor} é o método mais simples de se implementar, bem como o mais rápido~\cite{han2013}.
 
-% ----------------------------------------------------------
-% Apêndices
-% ----------------------------------------------------------
+A idéia do algoritmo de \textit{Nearest Neighbor} é simples - simplesmente copiar os pixels mais próximos para o lugar dos que estão sendo adicionados ao se ampliar a imagem. Isto gera resultados rápidos, porém de baixa qualidade, como podemos ver na Figura~\ref{fig:vaca:nearest}.c. Há um claro serrilhado que é introduzido ao se ampliar a imagem.
 
-% ---
-% Inicia os apêndices
-% ---
-\begin{apendicesenv}
+Reduzir uma imagem com este algoritmo também gera resultados pouco satisfatórios: novamente serrilhado é introduzido e detalhes são perdidos. Podemos ver isto na Figura~\ref{fig:vaca:nearest}.a.
 
-% ----------------------------------------------------------
-\chapter{Nullam elementum urna vel imperdiet sodales elit ipsum pharetra ligula
-ac pretium ante justo a nulla curabitur tristique arcu eu metus}
-% ----------------------------------------------------------
-\lipsum[55-57]
+% http://tech-algorithm.com/articles/nearest-neighbor-image-scaling/
 
-\end{apendicesenv}
-% ---
+\begin{figure}[H]
+    \begin{minipage}{.2\textwidth}
+        \centering
+        \includegraphics{cow_nearest_smallest}
+        (a) 50\%
+    \end{minipage}%
+    \begin{minipage}{0.35\textwidth}
+        \centering
+        \includegraphics{cow_very_small}
+        (b) Original
+    \end{minipage}~
+    \begin{minipage}{0.35\textwidth}
+        \centering
+        \includegraphics{cow_nearest}
+        (c) 150\%
+    \end{minipage}
+    \caption{Redução e Ampliação com algoritmo de \textit{Nearest Neighbor}}
+    \label{fig:vaca:nearest}
+\end{figure}
 
-% ----------------------------------------------------------
-% Anexos
-% ----------------------------------------------------------
-\cftinserthook{toc}{AAA}
-% ---
-% Inicia os anexos
-% ---
-%\anexos
-\begin{anexosenv}
+A Tabela~\ref{tab:nearest} mostra o tempo de execução para redução e ampliação em 50\% da imagem da Figura~\ref{fig:vaca:nearest}.b. Estes dados não nos dizem muito por enquanto, mas serão úteis quando compararmos aos resultados das Seções~\ref{sec:redimensionamento:bilinear} e~\ref{sec:redimensionamento:bicubica}. Podemos apenas ver que reduzir uma imagem demora menos que ampliar a mesma. Isto se dá pelo fato de haver menos pixels a serem calculados na imagem reduzida, e é esperado.
 
-% ---
-\chapter{Cras non urna sed feugiat cum sociis natoque penatibus et magnis dis
-parturient montes nascetur ridiculus mus}
-% ---
+\begin{table}[H]
+    \caption{Tempo de execução}
+    \centering
+    \label{tab:nearest}
+    \begin{tabular}{c||c}
+     Redução & Ampliação \\
+     \hline
+     0.17s & 0.21s
+    \end{tabular}
+\end{table}
 
-\lipsum[31]
+O código em Octave que faz esta interpolação pode ser visto na Figura~\ref{lst:scale:nearest}.
 
-\end{anexosenv}
+\begin{figure}[H]
+\lstinputlisting[language=Octave, lastline=6]{scale-nearest.m}
+\caption{Código-Fonte para interpolação \textit{Nearest Neighbor} no Octave}
+\label{lst:scale:nearest}
+\end{figure}
+
+O importante na listagem da Figura~\ref{lst:scale:nearest} é a linha 5, onde uma chamada para \textsf{imresize()} é feita. Esta função encapsula a chamada para a função \textsf{interp2()}, apenas adicionando algumas garantias de que o primeiro parâmetro é uma imagem válida e verificando se há múltiplos canais\footnote{\textit{i.e.} a imagem está em RGB} e, se houver, executando a interpolação para cada um dos canais individualmente.
+
+A função \textsf{interp2()}, por sua vez, recebe um parâmetro (passado pela \textsf{imresize()}) que diz qual tipo de interpolação deve ser feita. Neste caso, escolheu-se \emph{nearest}.
+
+O segundo parâmetro da função \textsf{imresize()} é o fator de escala. Um fator menor que $1$ resultará em uma imagem reduzida. De mesmo modo, um valor superior a $1$ resultará em uma ampliação da imagem original.
+
+\subsection{Interpolação Bilinear}\label{sec:redimensionamento:bilinear}
+
+A idéia da Interpolação Bilinear é executar uma interpolação linear em uma direção e, em seguida, uma interpolação linear na outra direção.
+
+Conforme~\cite{han2013}, podemos calcular a interpolação da seguinte maneira:
+
+Considere quatro pontos, $A$, $B$, $C$ e $D$. Suas coordenadas são, respectivamente, $(i, j)$, $(i, j+1)$, $(i+1, j)$, $(i+1, j+1)$. Para calcular o ponto $P(u, v)$, primeiro vamos calcular um ponto $E$, que é a interpolação linear de $A$ e $B$.
+
+\[
+f(i, j+v) = [f(i, j+1) - f(i,j)]v + f(i, j)
+\]
+
+Agora vamos calcular um ponto $F$, que é a interpolação linear de $C$ e $D$.
+
+\[
+f(i + 1, j + v) = [f(i + 1, j + 1) - f(i + 1, j)]v + f(i + 1, j)
+\]
+
+Finalmente, basta calcular a interpolação linear de $E$ e $F$ para obter $P$.
+
+\[
+f(i + u, j + v) = (1-u)(1-v)f(i,j)-(1-u)vf(i, j+ 1) + u(1-v)f(i+1,j) + uvf(i + 1, j+1)
+\]
+
+Isto deve ser feito, no caso de uma imagem colorida, para cada canal da imagem.
+
+Podemos ver na Figura~\ref{fig:vaca:bilinear} os resultados de uma redução em $50\%$ (Figura~\ref{fig:vaca:bilinear}.a) e uma ampliação em $50\%$ (Figura~\ref{fig:vaca:bilinear}.c).
+
+A imagem ampliada apresenta um serrilhado em todas as bordas, e a definição da grama é claramente perdida.
+
+O maior problema se encontra na imagem reduzida: uma borda preta foi gerada na imagem, devido ao processo de interpolação. Isto torna este método inútil para a redução de texturas em um jogo.
+
+\begin{figure}[H]
+    \begin{minipage}{.2\textwidth}
+        \centering
+        \includegraphics{cow_bilinear_smallest}
+        (a) 50\%
+    \end{minipage}%
+    \begin{minipage}{0.35\textwidth}
+        \centering
+        \includegraphics{cow_very_small}
+        (b) Original
+    \end{minipage}~
+    \begin{minipage}{0.35\textwidth}
+        \centering
+        \includegraphics{cow_bilinear}
+        (c) 150\%
+    \end{minipage}
+    \caption{Redução e Ampliação com algoritmo de Interpolação Bilinear}
+    \label{fig:vaca:bilinear}
+\end{figure}
+
+Na Tabela~\ref{tab:bilinear} vemos o tempo de execução para a redução e a ampliação utilizando interpolação bilinear. Novamente, a redução é mais rápida que a ampliação, por haver menos pixels a serem calculados.
+
+O tempo de execução da redução consta na Tabela~\ref{tab:bilinear} somente para referência, já que o resultado da mesma não é útil para o problema proposto.
+
+\begin{table}[H]
+    \caption{Tempo de execução}
+    \centering
+    \label{tab:bilinear}
+    \begin{tabular}{c||c}
+     Redução & Ampliação \\
+     \hline
+     0.15s & 0.23s
+    \end{tabular}
+\end{table}
+
+Vemos na listagem da Figura~\ref{lst:scale:linear} o código para fazer uma interpolação bilinear em uma imagem com o Octave.
+
+\begin{figure}[H]
+\lstinputlisting[language=Octave, lastline=6]{scale-bilinear.m}
+\caption{Código-Fonte para interpolação bilinear no Octave}
+\label{lst:scale:linear}
+\end{figure}
+
+O código é praticamente igual ao da Figura~\ref{lst:scale:nearest}, mudando apenas a o parâmetro do método de interpolação.
+
+A função \textsf{imresize()} novamente chamará a função \textsf{interp2()}, passando desta vez o parâmetro \emph{linear}.
 
 
-% ---
-% Título e resumo em língua estrangeira
-% ---
+\subsection{Interpolação Bicúbica}\label{sec:redimensionamento:bicubica}
 
-% \twocolumn[    		% INICIO DE ARTIGO EM DUAS COLUNAS
+A interpolação bicúbica é, das três testadas neste artigo, a mais complexa -- tanto em implementação quanto computacionalmente.~\cite{han2013}
 
-% titulo em inglês
-\titulo{Canonical academic article model with \abnTeX}
-\emptythanks
-\maketitle
+De acordo com~\cite{keys:1981}, podemos calcular a interpola\c{c}ão bicúbica com uma convolu\c{c}ão. Entretanto, o Octave implementa uma Interpolação de Lagrange de grau 3~\cite{eaton:2008} para este fim.
 
-% resumo em português
-\renewcommand{\resumoname}{Abstract}
-\begin{resumoumacoluna}
- \begin{otherlanguage*}{english}
-   According to ABNT NBR 6022:2003, an abstract in foreign language is a back
-   matter mandatory element.
+O Polinômio de Lagrange pode ser calculado da seguinte maneira~\cite{eaton:2008}:
 
-   \vspace{\onelineskip}
- 
-   \noindent
-   \textbf{Key-words}: latex. abntex.
- \end{otherlanguage*}  
-\end{resumoumacoluna}
+\[
+  P(x) = \sum^{n}_{j=1}P_j(x)
+\]
 
-% ]  				% FIM DE ARTIGO EM DUAS COLUNAS
-% ---
+Onde
+
+\[
+  P_j(x) = y_j\prod^{n}_{\substack{k=1\\k\neq j}}\frac{x-x_k}{x_j-x_k}
+\]
+
+Podemos ver na Figura~\ref{fig:vaca:bicubic} os resultados da interpolação bicúbica.
+
+A Figura~\ref{fig:vaca:bicubic}.a é uma redução em $50\%$. Notamos nela uma borda preta introduzida pela interpolação. Este resultado não nos serve, pois geraria discontinuidades nas texturas\footnote{Texturas são muito frequentemente replicadas lado-a-lado em superfícies de jogos, e qualquer discontinuidade estraga a ilusão da superfície}.
+
+A Figura~\ref{fig:vaca:bicubic}.c é uma ampliação em $50\%$. O resultado é bastante satisfatório, com pouco serrilhado. O nível de detalhe da grama e das montanhas ao fundo também é bom.
+
+\begin{figure}[H]
+    \begin{minipage}{.2\textwidth}
+        \centering
+        \includegraphics{cow_cubic_smallest}
+        (a) 50\%
+    \end{minipage}%
+    \begin{minipage}{0.35\textwidth}
+        \centering
+        \includegraphics{cow_very_small}
+        (b) Original
+    \end{minipage}~
+    \begin{minipage}{0.35\textwidth}
+        \centering
+        \includegraphics{cow_cubic}
+        (c) 150\%
+    \end{minipage}
+    \caption{Redução e Ampliação com algoritmo de Interpolação Bicúbica}
+    \label{fig:vaca:bicubic}
+\end{figure}
+
+Na Tabela~\ref{tab:bicubic} vemos os tempos de execução deste algoritmo. Novamente o resultado da redução consta somente como referência, pois a imagem gerada não atende os requisitos do problema.
+
+\begin{table}[H]
+    \caption{Tempo de execução}
+    \centering
+    \label{tab:bicubic}
+    \begin{tabular}{c||c}
+     Redução & Ampliação \\
+     \hline
+     0.19s & 0.29s
+    \end{tabular}
+\end{table}
+
+A Figura~\ref{lst:scale:cubic} mostra o código em Octave para realizar a interpolação bicúbica em uma imagem.
+
+\begin{figure}[H]
+\lstinputlisting[language=Octave, lastline=6]{scale-bicubic.m}
+\caption{Código-Fonte para interpolação bicúbica no Octave}
+\label{lst:scale:cubic}
+\end{figure}
+
+Este código é, novamente, muito similar ao da Figura~\ref{lst:scale:linear} e da Figura~\ref{lst:scale:nearest}. A única diferen\c{c}a é na chamada para \textsf{imresize()}, onde se passa o parâmetro \emph{cubic}, que indica que é necessário chamar \textsf{interp2()} com o mesmo parâmetro.
+
+\subsection{Comparação de Resultados}\label{sec:redimensionamento:comparacao}
+
+Podemos ver na Tabela~\ref{tab:scale:resultados} uma comparação do tempo de execução dos três algoritmos.
+
+Dada a avaliação subjetiva do resultado da imagem, já descartamos as redu\c{c}ões por Interpolação Bilinear (Seção~\ref{sec:redimensionamento:bilinear}) e por Interpolação Bicúbica (Seção~\ref{sec:redimensionamento:bicubica}), que podem ser vistas nas Figuras~\ref{fig:vaca:bilinear}.a e~\ref{fig:vaca:bicubic}.a, respectivamente.
+
+Isto nos deixa a clara escolha do método de \textit{Nearest Neighbor} para a redução de imagens, no nosso hipotético jogo.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}[H]{c || c | c | c}
+   & \textit{Nearest Neighbor} & Bilinear & Bicúbica \\
+    \hline
+   Redução & 0.17s & 0.15s & 0.19s \\
+   Ampliação & 0.21s & 0.23s & 0.29s
+  \end{tabular}
+  \caption{Resultados consolidados}
+  \label{tab:scale:resultados}
+\end{table}
+
+A Tabela~\ref{tab:scale:resultados} nos mostra que este método não é necessariamente o mais rápido, mas esta diferen\c{c}a é negligenciável e pode muito bem se dar por alguma peculiaridade do momento de execução dos testes.
+
+Para a ampliação, no entanto, a escolha não é tão trivial. Claramente o resultado da Interpolação Bilinear (Figura~\ref{fig:vaca:bilinear}.c) é melhor que o obtido pelo método de \textit{Nearest Neighbor} (Figura~\ref{fig:vaca:nearest}.c). Como a diferen\c{c}a de tempo de execução entre ambos é negligenciável, se a escolha devesse ser feita somente entre eles, a vitória seria da Interpolação Bilinear.
+
+Entretanto, comparando o resultado da Interpolação Bilinear com a Interpolação Bicúbica (Figuras~\ref{fig:vaca:bilinear}.c e~\ref{fig:vaca:bicubic}, respectivamente), notamos que o resultado da segunda é claramente melhor que o da primeira -- arestas são melhor definidas, principalmente. O problema se encontra no tempo de execução: o algoritmo de Interpolação Bicúbica é consideravelmente mais lento que o de Interpolação Linear.
+
+Não há, então, uma escolha que atenda todos os casos. Num jogo onde menos texturas são utilizadas, ou há um \emph{cache} das mesmas, resultando em poucos redimensionamentos, o custo maior do algoritmo de Interpolação Bicúbica pode compensar a qualidade inferior da Interpolação Bilinear. Caso muitas texturas diferentes sejam utilizadas, é possível que utilizar a Interpolação Bicúbica crie um gargalo na aplica\c{c}ão, causando lentidões e prejudicando a performance do jogo.
+
+\section{Rotação}\label{sec:rotacao}
+
+Novamente temos um problema não trivial, com um balanço entre qualidade e eficiência~\cite{kopf:2011}.
+
+Novamente, compararemos três métodos para realizar a rotação: O método de \textit{Nearest Neighbor}, descrito na Seção~\ref{sec:rotacao:nearest}; o método de Interpolação Bilinear, descrito na Seção~\ref{sec:rotacao:bilinear} e o método de Interpolação Bicúbica, descrito na Seção~\ref{sec:rotacao:bicubica}.
+
+Os algoritmos são os mesmos que os apresentados na Seção~\ref{sec:redimensionamento}, apenas aplicados de maneira diferente.
+
+\subsection{Rotação por \textit{Nearest Neighbor}}\label{sec:rotacao:nearest}
+
+Podemos ver o resultado na Figura~\ref{fig:vaca:rotacao}.b.
+
+Na Figura~\ref{lst:rotate:nearest} vemos o código-fonte que executa a interpolação por \textit{Nearest Neighbor} para realizar a rotação, no Octave.
+
+\begin{figure}[H]
+\lstinputlisting[language=Octave, lastline=6]{rotate-nearest.m}
+\caption{Código-Fonte para rotação por \textit{Nearest Neighbor} no Octave}
+\label{lst:rotate:nearest}
+\end{figure}
+
+A função \textsf{imrotate()}, bem como a \textsf{imresize()} (vista na Seção~\ref{sec:redimensionamento}, chama a função \textsf{interp2()}. Ela recebe como parâmetros, em ordem, a imagem, o ângulo de rotação (em graus), e o método de interpolação, que é passado para a \textsf{interp2()}.~\cite{eaton:2008}
+
+\subsection{Rotação por Interpolação Bilinear}\label{sec:rotacao:bilinear}
+
+O resultado da rotação pode ser visto na Figura~\ref{fig:vaca:rotacao}.c.
+
+A Figura~\ref{lst:rotate:bilinear} mostra o código em Octave para fazer esta rotação.
+
+\begin{figure}[H]
+\lstinputlisting[language=Octave, lastline=6]{rotate-bilinear.m}
+\caption{Código-Fonte para rotação por interpolação bilinear no Octave}
+\label{lst:rotate:bilinear}
+\end{figure}
+
+A única diferença deste código para o mostrado na Figura~\ref{lst:rotate:nearest} é o parâmetro da interpolação. Na Figura~\ref{lst:rotate:nearest} é passado \emph{nearest}, e neste é passado \emph{linear}. Este parâmetro é propagado para a função \textsf{interp2()}, que é a responsável pela interpolação.
+
+\subsection{Rotação por Interpolação Bicúbica}\label{sec:rotacao:bicubica}
+
+A Figura~\ref{fig:vaca:rotacao}.d mostra o resultado da rotação utilizando Interpolação Bicúbica.
+
+Na Figura~\ref{lst:rotate:bicubic} podemos ver o código em Octave para executar esta rotação.
+
+\begin{figure}[H]
+\lstinputlisting[language=Octave, lastline=6]{rotate-bicubic.m}
+\caption{Código-Fonte para rotação por interpolação bicúbica no Octave}
+\label{lst:rotate:bicubic}
+\end{figure}
+
+Mais uma vez, a única diferença deste código para o da Figura~\ref{lst:rotate:nearest} é o parâmetro do tipo de interpolação, que aqui é \emph{cubic}. A chamada é a mesma, e novamente a função \textsf{imrotate()} chamará a função \textsf{interp2()} para executar a interpolação.
+
+O Octave utiliza uma interpolação de Lagrange de grau 3 para cada eixo da imagem, em cada um dos três canais~\cite{eaton:2008}.
+
+\subsection{Comparação de Resultados}\label{sec:rotacao:comparacao}
+
+Na Figura~\ref{fig:vaca:rotacao} podemos ver, lado a lado, o resultado das três rotações sobre a mesma imagem, com o mesmo ângulo.
+
+\begin{figure}[H]
+    \begin{minipage}{.45\textwidth}
+        \centering
+        \includegraphics{cow_very_small}
+        \\
+        (a) Original
+    \end{minipage}%
+    \begin{minipage}{.45\textwidth}
+        \centering
+        \includegraphics{cow_nearest_rotated}
+        (b) \textit{Nearest Neighbor}
+    \end{minipage}
+    \\
+    \begin{minipage}{.45\textwidth}
+        \centering
+        \includegraphics{cow_bilinear_rotated}
+        (c) Bilinear
+    \end{minipage}%
+    \begin{minipage}{.45\textwidth}
+        \centering
+        \includegraphics{cow_cubic_rotated}
+        (d) Bicúbica
+    \end{minipage}
+    \caption{Rotação em $45^{\circ}$ por diferentes métodos}
+    \label{fig:vaca:rotacao}
+\end{figure}
+
+A primeira coisa que fica evidente é a borda preta introduzida pela rotação. Isto não é um problema em um jogo 3D -- a imagem ganhou esta borda preta por artefato do formato de exibição~\cite{eaton:2008}.
+
+Analisando o resultado das imagens, junto dos tempos de execução da Tabela~\ref{tab:rotacoes}, vemos que, entre a Interpolação Bilinear (Figura~\ref{fig:vaca:rotacao}.c) e a Interpolação por \textit{Nearest Neighbor} (Figura~\ref{fig:vaca:rotacao}.b), vale mais a pena escolher a primeira. A imagem resultante é claramente melhor no caso da Interpolação Bilinear, apresentando menos serrilhados nas bordas, levando essencialmente o mesmo tempo para ser calculada.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c|c|c}
+ \textit{Nearest Neighbor} & Bilinear & Bicúbica  \\
+ \hline
+ 0.62 & 0.63 & 2.11
+\end{tabular}
+\caption{Tempo de execução para rotações (em segundos)}
+\label{tab:rotacoes}
+\end{table}
+
+Comparando a Interpolação Bicúbica (Figura~\ref{fig:vaca:rotacao}.d) com a Interpolação Bilinear (Figura~\ref{fig:vaca:rotacao}.c), no entanto, temos uma decisão mais difícil. Por um lado, a Interpolação Bicúbica gera resultados ainda melhores, com arestas mais claramente definidas e menor perda de detalhes complexos como a grama. Por outro lado, o tempo total de execução é mais de 3 vezes maior. Isto pode ser uma perda de performance inaceitável em um jogo, dependendo da quantidade de texturas diferentes e a capacidade de se fazer \textit{cache} das mesmas.
+
+\section{Considerações Finais}
+
+A escolha do método de interpolação para realizar operações de ampliação, redução e rotação sobre imagens pode causar um impacto enorme na performance de um jogo, bem como no visual dele, e, portanto, deve ser feita com cuidado.
+
+A partir da análise feita neste artigo, ficou claro que não há um método que seja superior aos outros em todos os casos. Por vezes, limitações de tempo de execução farão com que a escolha seja pelo método mais rápido, sacrificando qualidade de resposta. Em outros casos, a qualidade da imagem gerada é importante, e temos que lidar com um tempo de cálculo maior, tentando otimizar outros pontos do código.
+
+Há, ainda, muitos outros métodos de interpolação que não foram analisados neste artigo, como as \textit{splines}. Para rotações, há ainda a possibilidade de fazê-las através de multiplicação de matrizes, entre outros métodos. Uma análise mais aprofundada destes métodos, comparando os resultados tanto em qualidade quanto em tempo de execução é interessante.
+
+Novamente, mesmo com a introdução de novos métodos, é possível que os métodos mais simples ainda sejam interessantes em alguns casos, principalmente aqueles onde a qualidade de resposta não é tão importante.
+
+No geral, vemos a importância de uma análise cuidadosa de todos os métodos numéricos, de um ponto de vista de computação científica, ao aplicá-los mesmo a problemas aparentemente distantes da computação científica, clássica e acadêmica, como o desenvolvimento de jogos.
+
+\printbibliography
 
 \end{document}
