@@ -16,5 +16,27 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \sortlist{nty}{nty}
+    \entry{venners:2003}{online}{}
+      \name{author}{1}{}{%
+        {{hash=4f73d3c9fa69ceb9612bb63bdb7f5db5}{Venners}{V\bibinitperiod}{Bill}{B\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{4f73d3c9fa69ceb9612bb63bdb7f5db5}
+      \strng{fullhash}{4f73d3c9fa69ceb9612bb63bdb7f5db5}
+      \field{sortinit}{V}
+      \field{sortinithash}{d18f5ce25ce0b5ca7f924e3f6c04870e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Making of Python}
+      \field{year}{2003}
+      \verb{url}
+      \verb http://www.artima.com/intv/pythonP.html
+      \endverb
+      \warn{\item Datamodel: Entry 'venners:2003' (relatorio.bib): Invalid format '16-08-2015' of date field 'urldate' - ignoring}
+    \endentry
+  \endsortlist
+\endrefsection
 \endinput
 
